@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body style="background: lightslategrey">
+    <header class="p-3 bg-dark text-white">
+        <div class="container" th:object="${user}">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
+                    <li><a href="/notes" class="nav-link px-2 text-white">Notes</a></li>
+                    <li><a href="/newnote" class="nav-link px-2 text-white">New Note</a></li>
+                    <li><a href="/mynote" class="nav-link px-2 text-white">My Note</a></li>
+                    <li><a href="/settings" class="nav-link px-2 text-white">Settings</a></li>
+                </ul>
+                <div class="text-end" th:if="${user}">
+                    <button type="button" class="btn btn-outline-light me-2" onclick="logoutForm()">Log out</button></div>
+                    <div th:unless="${user}">
+                        <button type="button" class="btn btn-outline-light me-2" onclick="loginForm()">Login</button>
+                        <button type="button" class="btn btn-outline-light me-2" onclick="signUpForm()">Sign-up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div th:object="${user}">
+        <div th:if="${user}">
+         <h1>You are logged with name: [[${user.firstName}]] and with roles: [[${user.role}]]</h1></div></div>
+    <div th:object="${info}">
+        <h2>[[${info}]]</h2>
+    </div>
+    <script type="text/javascript">
+        function loginForm(){
+            window.location="[[@{/login}]]"
+        }
+        function signUpForm(){
+            window.location="[[@{/signUp}]]"
+        }
+        function logoutForm(){
+            window.location="[[@{/logout}]]"
+        }
+    </script>
+</body>
+</html>
